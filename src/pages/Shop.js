@@ -1,11 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+
 import nike1 from './../assets/images/nike-1.jpg';
 import nike2 from './../assets/images/nike-2.jpg';
 import nike3 from './../assets/images/nike-3.jpg';
 
 const Shop = () => {
+	const navigate = useNavigate();
 	return (
 		<div className="container">
-			<button className="back-btn btn">Back</button>
+			<button className="back-btn btn" onClick={() => navigate(-1)}>
+				Back
+			</button>
 			<div className="page-title">
 				<h2>
 					Shop<span>.</span>

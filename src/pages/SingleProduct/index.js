@@ -13,7 +13,7 @@ const SingleProduct = () => {
 	useEffect(() => {
 		const fetchProduct = async () => {
 			const { aodai } = await request(
-				"https://ap-southeast-2.cdn.hygraph.com/content/clgln1ng7447t01t3gfz943dn/master",
+				`${process.env.REACT_APP_HYGRAPH_API_KEY}`,
 				`
 		{ 
 			aodai(where: {slug: "${slug}"}) {

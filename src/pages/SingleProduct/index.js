@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import nike1 from './../../assets/images/nike-1.jpg';
+import nike1 from '../../assets/images/nike-1.jpg';
 import './index.css';
 
 const SingleProduct = () => {

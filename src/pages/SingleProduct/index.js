@@ -1,10 +1,37 @@
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import nike1 from '../../assets/images/nike-1.jpg';
+import { request } from 'graphql-request';
+
 import './index.css';
 
 const SingleProduct = () => {
+	const [product, setProduct] = useState(null);
 	const navigate = useNavigate();
+	const { slug, category } = useParams();
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const { aodai } = await request(
+				"https://ap-southeast-2.cdn.hygraph.com/content/clgln1ng7447t01t3gfz943dn/master",
+				`
+		{ 
+			aodai(where: {slug: "${slug}"}) {
+				id
+				name
+				price
+				description
+				image {
+				  url
+				}
+			 }
+		}
+	 `
+			);
+			setProduct(aodai);
+		};
+		fetchProduct();
+	}, [slug]);
 
 	return (
 		<div className="container">
@@ -14,25 +41,24 @@ const SingleProduct = () => {
 			<div className="single-product-container">
 				<div className="page-title">
 					<h2>
-						Nike
+						{category}
 						<span>.</span>
 					</h2>
-					<div className="product-container">
-						<div className="product-img">
-							<img src={nike1} alt="" />
+					{product && (
+						<div className="product-container">
+							<div className="product-img">
+								<img src={product.image.url} alt="" />
+							</div>
+							<div className="product-info">
+								<h3 className="product-title">{product.name}</h3>
+								<p className="product-price">${product.price}</p>
+								<p className="product-description">{product.description}</p>
+								<button className="btn">
+									Add to Cart
+								</button>
+							</div>
 						</div>
-						<div className="product-info">
-							<h3 className="product-title">NIKE AIR</h3>
-							<p className="product-price">$213</p>
-							<p className="product-description">
-								The Air Jordan 1 Retro High OG ‘Stage Haze’ features neutral
-								tones on the foundational sneaker that started it all. The upper
-								combines a white leather base with a grey suede heel overlay and
-								a forefoot overlay in cracked black leather.
-							</p>
-							<button className=" btn">Add to Cart</button>
-						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</div>

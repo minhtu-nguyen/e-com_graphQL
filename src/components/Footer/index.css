@@ -4,6 +4,10 @@
 	padding: 40px 0;
 }
 
+.footer a {
+	color: #fff;
+}
+
 .footer .footer-flex {
 	display: flex;
 	justify-content: space-between;

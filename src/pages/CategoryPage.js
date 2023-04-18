@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { request } from 'graphql-request';
 
-const Shop = () => {
+const CategoryPage = () => {
 	const [products, setProducts] = useState([]);
-
+	const { category } = useParams();
 	const navigate = useNavigate();
-
+	
 	useEffect(() => {
 		const fetchAodais = async () => {
 			const { aodais } = await request(
 				`${process.env.REACT_APP_HYGRAPH_API_KEY}`,
 				`
          { 
-            aodais(first: 50) {
+            aodais(where: {category: {slug: "${category}"}}, first: 50) {
 							id
 							name
 							price
@@ -33,8 +33,7 @@ const Shop = () => {
 			setProducts(aodais);
 		};
 		fetchAodais();
-	}, []);
-
+	}, [category]);
 
 	return (
 		<div className="container">
@@ -43,7 +42,8 @@ const Shop = () => {
 			</button>
 			<div className="page-title">
 				<h2>
-					Shop<span>.</span>
+					{category}
+					<span>.</span>
 				</h2>
 			</div>
 			<div className="products">
@@ -52,7 +52,7 @@ const Shop = () => {
 						<img src={product.image.url} className="product-img" alt="" />
 						<div className="product-content">
 							<div className="flex-row">
-								<Link to={`${product.category.slug}/${product.slug}`}>
+								<Link to={`/shop/${product.category.slug}/${product.slug}`}>
 									<h3>{product.name}</h3>
 								</Link>
 								<p className="price">${product.price}</p>
@@ -74,4 +74,4 @@ const Shop = () => {
 	);
 };
 
-export default Shop;
+export default CategoryPage;

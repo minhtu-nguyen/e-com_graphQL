@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './index.css';
 
 const Hero = () => {
@@ -6,9 +7,11 @@ const Hero = () => {
 			<h1>
 				Welcome<span>.</span>
 			</h1>
-			<h3>No. 1 Sneakers Online Store</h3>
-			<small>PRODUCT 1 | PRODUCT 2 | PRODUCT 3</small>
-			<a href="#" className="btn">Shop Now</a>
+			<h3>Ao dai Online Store</h3>
+			<small>Modern | Traditional | Linen</small>
+			<Link to="/shop" className="btn">
+				Shop Now
+			</Link>
 		</div>
 	);
 };

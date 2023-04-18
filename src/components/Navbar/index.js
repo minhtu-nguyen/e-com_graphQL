@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+
 
 import './index.css';
 
@@ -26,10 +28,13 @@ const Navbar = () => {
 			<div className="navbar-container">
 				<div className="navbar-header">
 					<div className="navbar-logo">
-						SOMETHING STORE
+						<Link to="/">
+							AODAI STORE
+							<span>.</span>
+						</Link>
 					</div>
 					<div className="flex-icons">
-						<i className="fa-solid fa-cart-shopping cart-mobile"></i>
+						<i className="fa-solid fa-cart-shopping cart-mobile snipcart-checkout"></i>
 						<div className="hamburger-menu" onClick={toggleLinks}>
 							<i className="fa-solid fa-bars"></i>
 						</div>
@@ -38,12 +43,12 @@ const Navbar = () => {
 				<div className="navbar-links-container" ref={linksRef}>
 					<ul className="navbar-links">
 						<li>
-							<a href="#">Home</a>
+							<NavLink to="/">Home</NavLink>
 						</li>
 						<li>
-							<a href="#">Shop</a>
+							<NavLink to="/shop">Shop</NavLink>
 						</li>
-						<li className="cart-desktop">
+						<li className="cart-desktop snipcart-checkout">
 							<i className="fa-solid fa-cart-shopping"></i>
 						</li>
 					</ul>

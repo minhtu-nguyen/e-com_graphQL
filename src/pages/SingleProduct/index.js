@@ -53,9 +53,15 @@ const SingleProduct = () => {
 								<h3 className="product-title">{product.name}</h3>
 								<p className="product-price">${product.price}</p>
 								<p className="product-description">{product.description}</p>
-								<button className="btn">
-									Add to Cart
-								</button>
+								<button
+								className="snipcart-add-item btn"
+								data-item-id={product.id}
+								data-item-price={product.price}
+								data-item-image={product.image.url}
+								data-item-name={product.name}
+							>
+								Add to Cart
+							</button>
 							</div>
 						</div>
 					)}
